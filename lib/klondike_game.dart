@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:fdc_kay/components/card.dart';
 import 'package:fdc_kay/components/foundation.dart';
 import 'package:fdc_kay/components/pile.dart';
 import 'package:fdc_kay/components/stock.dart';
@@ -54,6 +57,19 @@ class KlondikeGame extends FlameGame {
       ..viewfinder.anchor = Anchor.topCenter;
 
     add(camera);
+
+    final random = Random();
+    for (var i = 0; i < 7; i++) {
+      for (var j = 0; j < 4; j++) {
+        final card = Card(random.nextInt(13) + 1, random.nextInt(4))
+          ..position = Vector2(100 + i * 1150, 100 + j * 1500)
+          ..addToParent(world);
+
+        if (random.nextDouble() < 0.9) {
+          card.flip();
+        }
+      }
+    }
   }
 }
 
